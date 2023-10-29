@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package users;
+
+option go_package = "./users";
+
+service UsersService {
+    rpc CreateUser (UserRequest) returns (UserResponse);
+    rpc GetUserByUsername (User) returns (UserResponse);
+    rpc GetAllUsers (NoParams) returns (UsersLists);
+    rpc GetUserById (UserId) returns (UserResponse);
+    rpc UpdateUser (User) returns (Count);
+    rpc DeleteUser (UserId) returns (Count);
+}
+
+message NoParams{}
+
+message UserId {
+    string id = 1;
+}
+
+message User {
+    string id = 1;
+    string username = 2;
+    string password = 3;
+}
+
+message Count {
+    string count = 1;
+}
+
+message Token {
+    string token = 1;
+}
+
+message UserRequest {
+    User userEntry = 1;
+}
+
+message UserResponse {
+    User response = 1;
+}
+
+message UsersLists {
+    repeated User response = 1;
+}
