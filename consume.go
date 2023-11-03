@@ -73,10 +73,35 @@ func (app *Config) RecivedReviewToRabbitmq(conn *amqp.Connection) {
 	go func() {
 		for d := range msgs {
 			log.Printf("Recived a message: %s", d.Body)
+			// err := sendEmail("shuaibuabdulkadir222@gmail.com", "Shuaibu comments on your product", string(d.Body))
+			// if err != nil {
+			// 	log.Println("Failed to send email", err)
+			// }
 		}
 	}()
 
-	log.Println("Successfully recieved", &msgs)
+	log.Println("Successfully recieved", msgs)
 
 	<-forever
 }
+
+// func sendEmail(email, subject, body string) error {
+// 	from := os.Getenv("GMAIL_ACCOUNT")
+// 	password := os.Getenv("GMAIL_SECRET")
+// 	host := "smtp.gmail.com"
+// 	port := 587
+
+// 	// Connect to the SMTP server.
+// 	auth := smtp.PlainAuth("", from, password, host)
+// 	to := []string{email}
+// 	msg := []byte("To: " + email + "\r\n" +
+// 		"Subject: " + subject + "\r\n" +
+// 		"\r\n" +
+// 		"Comment:" + body + "\r\n")
+// 	err := smtp.SendMail(fmt.Sprintf("%s:%d", host, port), auth, from, to, msg)
+// 	if err != nil {
+// 		return nil
+// 	}
+// 	log.Println("email is successfully sent to " + email)
+// 	return err
+// }
