@@ -8,7 +8,7 @@ jobs:
               uses: actions/checkout@v3
             - name: build
               run: |
-                docker build -f broker.dockerfile -t shuaibu12345/broker:latest
+                docker build -f broker.dockerfile -t shuaibu12345/broker:latest .
             - name: publish
               run: |
                 docker login -u shuaibu12345 -p ${{ secrets.DOCKER_HUB_TOKEN }}
